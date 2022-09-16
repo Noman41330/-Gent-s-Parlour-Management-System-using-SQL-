@@ -1,0 +1,74 @@
+CREATE TABLE Invoice
+( 
+  invoice_id Number(10) primary key,
+  service_item_list varchar2(30),
+  date_no DATE
+);
+
+CREATE TABLE Salon
+(
+ C_id number(10) primary key,
+ Company_name varchar2(40) not null 
+);
+
+CREATE TABLE Bill
+(
+ bill_id number(10) primary key,
+ bill_type varchar2(30),
+ invoice_id Number(10),
+ constraint fk_invoice_id foreign key(invoice_id) references Invoice(invoice_id)
+);
+
+CREATE TABLE Address
+(
+ a_id number(10) primary key,
+ area varchar2(20),
+ city varchar2(20) 
+
+);
+
+CREATE TABLE Customer
+(
+ Customer_id number(10) primary key,
+ Name varchar2(30) not null,
+ phone_no1 number(16),
+ phone_no2 number(16),
+ bill_id number(10),
+ constraint fk_bill_id foreign key(bill_id) references Bill(bill_id),
+ a_id number(10),
+ constraint fk_a_id foreign key(a_id) references Address(a_id)
+);
+
+
+
+CREATE TABLE Service_type
+(
+ service_type_id number(10) primary key,
+ Customer_id number(10),
+ constraint fk_Customer_id foreign key(Customer_id) references Customer(Customer_id),
+ C_id number(10),
+ constraint fk_C_id foreign key(C_id) references Salon(C_id)
+);
+
+
+
+CREATE TABLE Service
+(
+ service_id number(10) primary key,
+ service_name varchar2(30) not null,
+ price float(24),
+ service_type_id number(10),
+ constraint fk_service_type_id foreign key(service_type_id) references Service_type(service_type_id)
+);
+
+
+CREATE TABLE Staff
+(
+ staff_id number(10) primary key,
+ staff_name varchar2(30) not null,
+ phone_no1 number(16),
+ phone_no2 number(16),
+ designation varchar2(20),
+ service_id number(10),
+ constraint fk_service_id foreign key(service_id) references Service(service_id)
+);

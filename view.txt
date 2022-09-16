@@ -1,0 +1,36 @@
+question-1: Create a view, VW_1, that contains staffs name,designation and phone numbers in salary 15,000 taka.
+answer-1: CREATE VIEW VW_1 AS
+          select staff_name, designation,phone_no1,phone_no2
+          from Staff
+          where salary >= 15,000;
+
+
+
+
+question-2: Create a view by using column aliases, VW_2, using that contains service_name and price in 500 taka.
+answer-2: CREATE VIEW VW_1 AS
+	  select service_name NAME_OF_OUR_SERVICES , price PRICE_FOR_SERVICES
+          from Service
+          where price<= 500;
+
+
+question-3:Display the name and designation for all staffs who earn more than 18,000 taka.
+ans-3:  SELECT staff_name, designation
+        FROM Staff
+        WHERE staff_name >
+                          (
+                            select staff_name 
+                            from Staff
+                            where salary= 18000);
+
+question-4:Display the service name and id in 500 taka range.
+ans-4:  SELECT service_name, service_id
+        FROM Serivce
+        WHERE service_name >=
+                          (
+                            select service_name
+                            from Service
+                            where price= 500);
+
+
+
